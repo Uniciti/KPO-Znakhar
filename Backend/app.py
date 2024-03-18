@@ -1,35 +1,31 @@
 from flask import Flask, request, jsonify
+from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__)
 
+UPLOAD_FOLDER = 'images'  # Папка для сохранения загруженных изображений
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
 
-@app.route('/')
-def hello():
-    return "Hello, World!"
-
-
-tasks = [
-    {
-        'id': 1,
-        'title': u'Buy groceries',
-        'description': u'Milk, Cheese, Pizza, Fruit, Tylenol',
-        'done': False
-    },
-    {
-        'id': 2,
-        'title': u'Learn Python',
-        'description': u'Need to find a good Python tutorial on the web',
-        'done': False
-    }
-]
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
-@app.route('/todo/api/v1.0/tasks', methods=['GET'])
-def get_tasks():
-    return jsonify({'tasks': tasks})
+@app.route('/upload-image', methods=['POST'])
+def upload_image():
+    if 'file' not in request.files:
+        return jsonify({"error": "No file part"}), 400
+
+    file = request.files['file']
+    if file.filename == '':
+        return jsonify({"error": "No selected file"}), 400
+
+    if file:
+        filename = secure_filename(file.filename)
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(filepath)
+        return jsonify({"message": "File uploaded successfully", "filename": filename}), 200
 
 
 if __name__ == '__main__':
-    # from waitress import serve
-    # serve(app, host="127.0.0.1", port=8080)
     app.run(debug=True)
