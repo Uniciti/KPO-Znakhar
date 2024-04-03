@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_app"
+    app:startDestination="@id/mainScreenFragment">
+
+    <fragment
+        android:id="@+id/mainScreenFragment"
+        android:name="com.example.homefarmer.presentation.MainScreenFragment"
+        android:label="MainScreenFragment" >
+        <action
+            android:id="@+id/action_mainScreenFragment_to_photoCameraFragment"
+            app:destination="@id/photoCameraFragment" />
+        <action
+            android:id="@+id/action_mainScreenFragment_to_reportsFragment"
+            app:destination="@id/reportsFragment" />
+        <action
+            android:id="@+id/action_mainScreenFragment_to_galleryFragment"
+            app:destination="@id/galleryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/photoCameraFragment"
+        android:name="com.example.homefarmer.presentation.PhotoCameraFragment"
+        android:label="PhotoCameraFragment" />
+    <fragment
+        android:id="@+id/reportsFragment"
+        android:name="com.example.homefarmer.presentation.ReportsFragment"
+        android:label="ReportsFragment" />
+    <fragment
+        android:id="@+id/galleryFragment"
+        android:name="com.example.homefarmer.presentation.GalleryFragment"
+        android:label="GalleryFragment" />
+</navigation>

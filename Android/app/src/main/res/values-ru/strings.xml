@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Домашний фермер</string>
+    <string name="inst">Инструкция</string>
+    <string name="inst_using_app">Привет</string>
+    <string name="clear">Понятно</string>
+</resources>

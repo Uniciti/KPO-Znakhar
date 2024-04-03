@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Home farmer</string>
     <string name="inst">Instruction</string>
+    <string name="inst_using_app">Hello</string>
+    <string name="clear">Clear</string>
+
 </resources>
