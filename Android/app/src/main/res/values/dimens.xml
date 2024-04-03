@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="size_img">150dp</dimen>
+    <dimen name="corner_size_cardview">24dp</dimen>
+    <dimen name="margin_horizontal_cardview">24dp</dimen>
+    <dimen name="margin_vertival_cardview">24dp</dimen>
+    <dimen name="padding_cardview">8dp</dimen>
+</resources>

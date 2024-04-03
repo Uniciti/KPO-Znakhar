@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="cardview_main_screen" parent="Widget.MaterialComponents.CardView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cardBackgroundColor">@color/primary</item>
+        <item name="cardCornerRadius">@dimen/corner_size_cardview</item>
+        <item name="android:layout_marginStart">@dimen/margin_horizontal_cardview</item>
+        <item name="android:layout_marginEnd">@dimen/margin_horizontal_cardview</item>
+        <item name="android:layout_marginTop">@dimen/margin_vertival_cardview</item>
+        <item name="android:layout_marginBottom">@dimen/margin_horizontal_cardview</item>
+        <item name="contentPadding">@dimen/padding_cardview</item>
+    </style>
+    <style name="img_cardview_main_screen">
+        <item name="android:layout_width">@dimen/size_img</item>
+        <item name="android:layout_height">@dimen/size_img</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+    <style name="Base_ToolbarStyle">
+        <item name="android:background">@color/primary</item>
+    </style>
+</resources>

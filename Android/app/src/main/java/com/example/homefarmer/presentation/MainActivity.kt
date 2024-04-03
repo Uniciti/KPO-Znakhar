@@ -1,7 +1,8 @@
-package com.example.homefarmer
+package com.example.homefarmer.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.homefarmer.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
