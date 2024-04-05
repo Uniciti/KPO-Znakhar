@@ -5,4 +5,7 @@
     <dimen name="margin_horizontal_cardview">24dp</dimen>
     <dimen name="margin_vertival_cardview">24dp</dimen>
     <dimen name="padding_cardview">8dp</dimen>
+    <dimen name="size_btn_camera">60dp</dimen>
+    <dimen name="size_icon_capture_camera">48dp</dimen>
+    <dimen name="size_icon_flash_camera">40dp</dimen>
 </resources>

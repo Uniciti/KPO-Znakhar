@@ -21,7 +21,12 @@
     <fragment
         android:id="@+id/photoCameraFragment"
         android:name="com.example.homefarmer.presentation.PhotoCameraFragment"
-        android:label="PhotoCameraFragment" />
+        android:label="PhotoCameraFragment" >
+        <action
+            android:id="@+id/action_photoCameraFragment_to_reportFragment"
+            app:destination="@id/reportFragment"
+            app:popUpTo="@id/mainScreenFragment" />
+    </fragment>
     <fragment
         android:id="@+id/reportsFragment"
         android:name="com.example.homefarmer.presentation.ReportsFragment"
@@ -30,4 +35,8 @@
         android:id="@+id/galleryFragment"
         android:name="com.example.homefarmer.presentation.GalleryFragment"
         android:label="GalleryFragment" />
+    <fragment
+        android:id="@+id/reportFragment"
+        android:name="com.example.homefarmer.presentation.ReportFragment"
+        android:label="ReportFragment" />
 </navigation>

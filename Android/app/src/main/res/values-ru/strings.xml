@@ -10,4 +10,6 @@
     <string name="context_info_page2">Вторая кнопка позволяет Вам пересматривать прошлые отчеты, которые Вы пожелали сохранить</string>
     <string name="title_info_page3">Просмотр фото из галлереи</string>
     <string name="context_info_page3">Третья кнопка позволяет вам посмотреть сохраненные фотки</string>
+    <string name="refresh_internet">Обновить</string>
+    <string name="error_internet">Нет подключения к интернету</string>
 </resources>
