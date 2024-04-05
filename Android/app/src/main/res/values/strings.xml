@@ -3,5 +3,13 @@
     <string name="inst">Instruction</string>
     <string name="inst_using_app">Hello</string>
     <string name="clear">Clear</string>
+    <string name="title_info_page1">Take a photo for processing</string>
+    <string name="context_info_page1">The first button allows you to take a picture of the leaf of
+        the plant on which, in your opinion, there is a focus of the disease</string>
+    <string name="title_info_page2">Open the list of saved reports</string>
+    <string name="context_info_page2">The second button allows you to review past reports that you
+        wish to save.</string>
+    <string name="title_info_page3">Viewing photos from the gallery</string>
+    <string name="context_info_page3">The third button allows you to view the saved photos</string>
 
 </resources>
