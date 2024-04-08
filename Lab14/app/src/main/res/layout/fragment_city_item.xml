@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".presentation.CityItemFragment">
+
+    <TextView
+        android:id="@+id/tvNameCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Город: Томск"/>
+
+    <TextView
+        android:id="@+id/tvDistrictCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Федеральный округ: Сибирский"/>
+
+    <TextView
+        android:id="@+id/tvRegionCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Регион: Томская область"/>
+
+    <TextView
+        android:id="@+id/tvPostalCodeCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Почтовый индекс: 634000"/>
+
+    <TextView
+        android:id="@+id/tvTimeZoneCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Часовой пояс: UTC+7"/>
+
+    <TextView
+        android:id="@+id/tvPopulationCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Население: 522940"/>
+
+    <TextView
+        android:id="@+id/tvFoundedCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Основан в: 1604 году"/>
+
+    <Button
+        android:id="@+id/btnShowCityMap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/show_city" />
+</LinearLayout>

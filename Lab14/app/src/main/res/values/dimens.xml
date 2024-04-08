@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_top_btn_choose_city">32dp</dimen>
+    <dimen name="margin_horizontal_main_activity">8dp</dimen>
+    <dimen name="text_size_city_item_city">16sp</dimen>
+    <dimen name="margin_bottom_text_title">4dp</dimen>
+    <dimen name="text_size_region_item_city">14dp</dimen>
+    <dimen name="padding_content_item_city">4dp</dimen>
+    <dimen name="margin_vertical_item_city">4dp</dimen>
+    <dimen name="card_elevation_item_city">0dp</dimen>
+    <dimen name="card_stroke_width">0dp</dimen>
+</resources>

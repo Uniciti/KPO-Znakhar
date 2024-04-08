@@ -11,6 +11,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Surface.ROTATION_180
+import android.view.Surface.ROTATION_270
+import android.view.Surface.ROTATION_90
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -18,6 +21,7 @@ import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
+import androidx.camera.core.impl.ImageCaptureConfig
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -105,8 +109,8 @@ class PhotoCameraFragment : Fragment() {
                         binding.cameraPreview.surfaceProvider
                     )
                 }
+
             imageCapture = ImageCapture.Builder()
-                .setTargetRotation(view?.display?.rotation!!)
                 .build()
 
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
@@ -179,8 +183,6 @@ class PhotoCameraFragment : Fragment() {
         private val CAMERAX_PERMISSIONS = arrayOf(
             Manifest.permission.CAMERA
         )
-        private const val PREFIX = "photo"
-        private const val SUFFIX = ".jpg"
     }
 
 }
