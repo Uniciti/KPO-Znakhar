@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".presentation.ReportFragment">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_content_report_fragment"
+        tools:context=".presentation.ReportSaveFragment">
 
+
+        <Button
+            android:id="@+id/btnSaveResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/btn_save_marginTop"
+            android:backgroundTint="@color/primary"
+            android:text="@string/save"
+            android:textSize="@dimen/btn_save_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvListRecommendation" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -22,11 +37,57 @@
 
         <ImageView
             android:id="@+id/imgReportResult"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_img_plant_report"
             android:src="@drawable/plant"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/style_text_title_result_processing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/result_processing"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgReportResult" />
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/style_text_title_list_defects"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/list_defects"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/tvListDefects"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_marginTop_list_defects"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            tools:text="@string/item_list_defects" />
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/style_text_title_list_defects"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recommendations"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvListDefects" />
+
+        <TextView
+            android:id="@+id/tvListRecommendation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_marginTop_list_defects"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            tools:text="@string/item_list_defects" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</ScrollView>

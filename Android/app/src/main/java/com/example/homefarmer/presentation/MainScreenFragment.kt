@@ -1,5 +1,7 @@
 package com.example.homefarmer.presentation
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -58,8 +60,9 @@ class MainScreenFragment : Fragment() {
             navigateTo(R.id.action_mainScreenFragment_to_galleryFragment)
         }
         tbMainScreen.setOnMenuItemClickListener {
-            if (it.itemId == R.id.info_item) {
-                showDialog()
+            when(it.itemId) {
+                R.id.info_item -> showDialog()
+                R.id.help_item -> TODO()
             }
             true
         }
@@ -79,6 +82,7 @@ class MainScreenFragment : Fragment() {
         viewPager(dialogBinding)
         builder.setView(dialogView)
         val alertDialog = builder.create()
+        alertDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         dialogBinding.btnCancel.setOnClickListener {
             alertDialog.cancel()

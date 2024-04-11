@@ -8,4 +8,25 @@
     <dimen name="size_btn_camera">60dp</dimen>
     <dimen name="size_icon_capture_camera">48dp</dimen>
     <dimen name="size_icon_flash_camera">40dp</dimen>
+    <dimen name="padding_content_dialog">8dp</dimen>
+    <dimen name="text_size_title_dialog">20sp</dimen>
+    <dimen name="text_content_dialog_marginTop">8dp</dimen>
+    <dimen name="text_size_content_dialog">16sp</dimen>
+    <dimen name="corner_size_dialog">24dp</dimen>
+    <dimen name="content_padding_dialog">8dp</dimen>
+    <dimen name="margin_icon_capture">16dp</dimen>
+    <dimen name="height_img_plant_report">360dp</dimen>
+    <dimen name="padding_content_report_fragment">24dp</dimen>
+    <dimen name="text_size_result_processing">24sp</dimen>
+    <dimen name="marginTop_text_result_processing">8dp</dimen>
+    <dimen name="text_size_title_list_defects">18sp</dimen>
+    <dimen name="marginTop_text_list_defects">16dp</dimen>
+    <dimen name="text_size_list_defects">14sp</dimen>
+    <dimen name="text_marginTop_list_defects">8dp</dimen>
+    <dimen name="btn_save_marginTop">16dp</dimen>
+    <dimen name="btn_save_text_size">24sp</dimen>
+    <dimen name="marginTop_carview_plant_report">12dp</dimen>
+    <dimen name="contentPadding_cardview_plant_report">16dp</dimen>
+    <dimen name="corner_size_cardview_plant_report">14dp</dimen>
+    <dimen name="text_size_cardview_plant_report">20sp</dimen>
 </resources>

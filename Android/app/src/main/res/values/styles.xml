@@ -19,4 +19,43 @@
     <style name="Base_ToolbarStyle">
         <item name="android:background">@color/primary</item>
     </style>
+    <style name="text_title_dialog">
+        <item name="android:textSize">@dimen/text_size_title_dialog</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/color_text_dialog</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="text_content_dialog">
+        <item name="android:textSize">@dimen/text_size_content_dialog</item>
+        <item name="android:layout_marginTop">@dimen/text_content_dialog_marginTop</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/color_text_dialog</item>
+    </style>
+    <style name="style_text_title_result_processing">
+        <item name="android:textSize">@dimen/text_size_result_processing</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">@dimen/marginTop_text_result_processing</item>
+    </style>
+    <style name="style_text_title_list_defects">
+        <item name="android:textSize">@dimen/text_size_title_list_defects</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:layout_marginTop">@dimen/marginTop_text_list_defects</item>
+    </style>
+    <style name="style_text_list_defects">
+        <item name="android:textSize">@dimen/text_size_list_defects</item>
+        <item name="android:layout_marginTop">@dimen/text_marginTop_list_defects</item>
+    </style>
+    <style name="style_cardeview_plant_report" parent="Widget.MaterialComponents.CardView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cardBackgroundColor">@color/primary</item>
+        <item name="cardCornerRadius">@dimen/corner_size_cardview_plant_report</item>
+        <item name="android:layout_margin">@dimen/marginTop_carview_plant_report</item>
+        <item name="contentPadding">@dimen/contentPadding_cardview_plant_report</item>
+    </style>
+    <style name="style_text_cardview_plant_report">
+        <item name="android:textSize">@dimen/text_size_cardview_plant_report</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/color_text_dialog</item>
+    </style>
 </resources>
