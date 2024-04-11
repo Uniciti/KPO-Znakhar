@@ -170,12 +170,13 @@ class PhotoCameraFragment : Fragment() {
     private fun launchPlantReportFragment(imgPath: String) {
         findNavController().navigate(
             R.id.action_photoCameraFragment_to_reportFragment,
-            bundleOf(ReportSaveFragment.REPORT_KEY to imgPath)
+            bundleOf(REPORT_KEY to imgPath)
         )
     }
 
 
     companion object {
+        private const val REPORT_KEY = "report_key"
         private const val CAMERA_PERMISSION_CODE = 1
         private val CAMERAX_PERMISSIONS = arrayOf(
             Manifest.permission.CAMERA

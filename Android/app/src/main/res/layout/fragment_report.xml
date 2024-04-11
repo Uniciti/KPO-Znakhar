@@ -19,6 +19,7 @@
             android:layout_marginTop="@dimen/btn_save_marginTop"
             android:backgroundTint="@color/primary"
             android:text="@string/save"
+            android:textColor="@color/color_text_dialog"
             android:textSize="@dimen/btn_save_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

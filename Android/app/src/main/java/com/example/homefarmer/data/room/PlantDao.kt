@@ -13,6 +13,8 @@ interface PlantDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addPlantReportItem(plantReportItem: PlantReportItem)
 
+
+
     @Query("SELECT * FROM plant_table ORDER BY id ASC")
     fun getPlantReportList(): LiveData<List<PlantReportItem>>
 

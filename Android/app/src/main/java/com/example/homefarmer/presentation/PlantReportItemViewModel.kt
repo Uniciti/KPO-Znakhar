@@ -9,6 +9,7 @@ import com.example.homefarmer.data.room.PlantDatabase
 import com.example.homefarmer.domain.entity.PlantReportItem
 import com.example.homefarmer.domain.repository.PlantReportRepository
 import com.example.homefarmer.domain.usecases.AddPlantReportItemUseCase
+import com.example.homefarmer.domain.usecases.GetPlantReportItemUseCase
 import com.example.homefarmer.domain.usecases.GetPlantReportListUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,8 +24,13 @@ class PlantReportItemViewModel(application: Application): AndroidViewModel(appli
 
     private val addPlantReportItemUseCase = AddPlantReportItemUseCase(repository)
     private val getPlantReportListUseCase = GetPlantReportListUseCase(repository)
+    private val getPlantReportItemUseCase = GetPlantReportItemUseCase(repository)
 
     val plantReportList = getPlantReportListUseCase()
+
+    private val _plantReportItem = MutableLiveData<PlantReportItem>()
+    val plantReportItem: LiveData<PlantReportItem>
+        get() = _plantReportItem
 
     fun addPlantReport(plantReportItem: PlantReportItem) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -32,5 +38,12 @@ class PlantReportItemViewModel(application: Application): AndroidViewModel(appli
         }
     }
 
+    fun getPlantReport(plantReportItemId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val item = getPlantReportItemUseCase(plantReportItemId)
+            _plantReportItem.postValue(item)
+        }
+
+    }
 
 }

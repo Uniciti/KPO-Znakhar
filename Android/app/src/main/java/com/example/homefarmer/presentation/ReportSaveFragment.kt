@@ -15,8 +15,14 @@ import androidx.navigation.fragment.findNavController
 import com.example.homefarmer.R
 import com.example.homefarmer.databinding.FragmentReportBinding
 import com.example.homefarmer.domain.entity.PlantReportItem
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.lang.RuntimeException
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class ReportSaveFragment : Fragment() {
     private var _binding: FragmentReportBinding? = null
@@ -26,7 +32,6 @@ class ReportSaveFragment : Fragment() {
         ViewModelProvider(this)[PlantReportItemViewModel::class.java]
     }
     private var imgPath: String? = null
-    private var imgBitmap: Bitmap? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,13 +48,15 @@ class ReportSaveFragment : Fragment() {
 
         binding.btnSaveResult.setOnClickListener {
             // todo изменить реализацию
-            viewModel.addPlantReport(PlantReportItem(
-                0,
-                imgPath!!,
-                "",
-                "",
-                getCurrentDate()
-            ))
+            viewModel.addPlantReport(
+                PlantReportItem(
+                    0,
+                    imgPath!!,
+                    "",
+                    "",
+                    getCurrentDate()
+                )
+            )
             launchPlantReportList()
         }
 
@@ -61,19 +68,22 @@ class ReportSaveFragment : Fragment() {
     }
 
     private fun parseParam() {
-        imgPath = arguments?.getString(REPORT_KEY)
-        transformBitmap()
+        val imgPath = arguments?.getString(REPORT_KEY) ?: throw RuntimeException("Can't find img")
+
+        transformBitmap(imgPath)
     }
 
-    private fun transformBitmap() {
+    private fun transformBitmap(imgPath: String) {
         val photoUri = Uri.parse(imgPath)
-        imgBitmap = try {
+        var imgBitmap = try {
             BitmapFactory.decodeStream(requireContext().contentResolver.openInputStream(photoUri))
         } catch (ex: Exception) {
             ex.printStackTrace()
             null
         }
         imgBitmap = rotateBitmap(imgBitmap, DEGREES)
+
+        imgBitmap?.let { saveFile(it) }
 
         // todo вынести в отдельную функцию для вставки, когда будет принимать данные с сервера
         binding.imgReportResult.setImageBitmap(imgBitmap)
@@ -88,6 +98,16 @@ class ReportSaveFragment : Fragment() {
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
     }
 
+    private fun saveFile(imgBitmap: Bitmap) {
+
+        val file = File(context?.filesDir, getNameImage())
+        imgPath = file.toString()
+        val outputStream = FileOutputStream(file)
+        imgBitmap.compress(Bitmap.CompressFormat.JPEG, QUALITY_IMG, outputStream)
+        outputStream.close()
+
+    }
+
     @SuppressLint("SimpleDateFormat")
     fun getCurrentDate(): String {
         // Получаем текущую дату
@@ -98,14 +118,23 @@ class ReportSaveFragment : Fragment() {
         return dateFormat.format(calendar.time)
     }
 
+    fun getNameImage(): String {
+        val dateFormat = SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.getDefault())
+        val currentTimeFormatted = dateFormat.format(Date())
+
+        return "$dateFormat $currentTimeFormatted $TYPE_IMG"
+    }
+
     private fun launchPlantReportList() {
         findNavController().navigate(R.id.action_reportFragment_to_reportsFragment)
     }
 
     companion object {
-        const val REPORT_KEY = "report_key"
+        private const val REPORT_KEY = "report_key"
         private const val DEGREES = 90f
         private const val DATE_FORMAT = "dd.MM.yyyy"
+        private const val QUALITY_IMG = 100
+        private const val TYPE_IMG = "image.jpg"
     }
 
 }

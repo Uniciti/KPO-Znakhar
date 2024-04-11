@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 data class PlantImgItem(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val img: String
+    val img: ByteArray
 )
