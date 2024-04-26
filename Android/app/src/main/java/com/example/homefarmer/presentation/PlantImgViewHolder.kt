@@ -1,6 +1,7 @@
 package com.example.homefarmer.presentation
 
 import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homefarmer.databinding.ItemImgPlantBinding
@@ -13,5 +14,6 @@ class PlantImgViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun bind(plantImg: PlantImg) {
         binding.imgPlant.setImageBitmap(plantImg.img)
+
     }
 }
