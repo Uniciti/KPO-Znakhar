@@ -4,7 +4,12 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:statusBarColor">@color/primary</item>
+        <item name="actionOverflowButtonStyle">@style/FeedbackButton</item>
     </style>
 
     <style name="Theme.HomeFarmer" parent="Base.Theme.HomeFarmer" />
+
+    <style name="FeedbackButton" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/black</item>
+    </style>
 </resources>

@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.homefarmer.R
 
 import com.example.homefarmer.databinding.FragmentReportsBinding
@@ -36,6 +38,15 @@ class ReportsFragment : Fragment() {
 
         setupRecyclerView()
         observerViewModel()
+
+        binding.tbReportsScreen.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+        binding.tbReportsScreen.setOnMenuItemClickListener {
+            if (it.itemId == R.id.item_delete) viewModel.deletePlantReportList()
+
+            true
+        }
     }
 
     override fun onDestroyView() {
@@ -48,6 +59,7 @@ class ReportsFragment : Fragment() {
         binding.rvPlantReportList.adapter = adapter
 
         setupClickListener()
+        setupSwipeListener()
     }
 
     private fun observerViewModel() {
@@ -67,6 +79,27 @@ class ReportsFragment : Fragment() {
             R.id.action_reportsFragment_to_plantReportShowFragment,
             bundleOf(PRIMARY_KEY_ID to plantReportItemId)
         )
+    }
+
+    private fun setupSwipeListener() {
+        val callback = object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val item = adapter.currentList[viewHolder.adapterPosition]
+                viewModel.deletePlantReportItem(item)
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(callback)
+        itemTouchHelper.attachToRecyclerView(binding.rvPlantReportList)
     }
 
     companion object {

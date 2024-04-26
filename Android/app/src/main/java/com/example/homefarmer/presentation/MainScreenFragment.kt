@@ -1,19 +1,21 @@
 package com.example.homefarmer.presentation
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.homefarmer.R
 import com.example.homefarmer.databinding.CustomDialogInfoBinding
 import com.example.homefarmer.databinding.FragmentMainScreenBinding
+
 
 class MainScreenFragment : Fragment() {
     private var _binding: FragmentMainScreenBinding? = null
@@ -62,11 +64,23 @@ class MainScreenFragment : Fragment() {
         tbMainScreen.setOnMenuItemClickListener {
             when(it.itemId) {
                 R.id.info_item -> showDialog()
-                R.id.help_item -> TODO()
+                R.id.help_item -> openEmailApp()
             }
             true
         }
     }
+
+    private fun openEmailApp() {
+        val intent = Intent(Intent.ACTION_SENDTO)
+        intent.data = Uri.parse("mailto:homefarmer@gmail.com")
+
+        if (intent.resolveActivity(requireContext().packageManager) != null) {
+            startActivity(intent)
+        } else {
+            Toast.makeText(requireContext(), "@strings/MailError", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
     private fun navigateTo(actionId: Int) {
         findNavController().navigate(

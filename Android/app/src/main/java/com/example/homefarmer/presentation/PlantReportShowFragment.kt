@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.homefarmer.R
 import com.example.homefarmer.databinding.FragmentPlantReportShowBinding
 import com.example.homefarmer.domain.entity.PlantReportItem
@@ -43,6 +44,11 @@ class PlantReportShowFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.tbReportPlant.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+
         launchScreen()
         observerViewModel()
 

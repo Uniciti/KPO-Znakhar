@@ -60,6 +60,10 @@ class ReportSaveFragment : Fragment() {
             launchPlantReportList()
         }
 
+        binding.tbReportPlant.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+
     }
 
     override fun onDestroyView() {

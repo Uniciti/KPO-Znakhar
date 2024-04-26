@@ -9,6 +9,8 @@ import com.example.homefarmer.data.room.PlantDatabase
 import com.example.homefarmer.domain.entity.PlantReportItem
 import com.example.homefarmer.domain.repository.PlantReportRepository
 import com.example.homefarmer.domain.usecases.AddPlantReportItemUseCase
+import com.example.homefarmer.domain.usecases.DeletePlantReportItemUseCase
+import com.example.homefarmer.domain.usecases.DeletePlantReportListUseCase
 import com.example.homefarmer.domain.usecases.GetPlantReportItemUseCase
 import com.example.homefarmer.domain.usecases.GetPlantReportListUseCase
 import kotlinx.coroutines.Dispatchers
@@ -25,6 +27,8 @@ class PlantReportItemViewModel(application: Application): AndroidViewModel(appli
     private val addPlantReportItemUseCase = AddPlantReportItemUseCase(repository)
     private val getPlantReportListUseCase = GetPlantReportListUseCase(repository)
     private val getPlantReportItemUseCase = GetPlantReportItemUseCase(repository)
+    private val deletePlantReportListUseCase = DeletePlantReportListUseCase(repository)
+    private val deletePlantReportItemUseCase = DeletePlantReportItemUseCase(repository)
 
     val plantReportList = getPlantReportListUseCase()
 
@@ -44,6 +48,18 @@ class PlantReportItemViewModel(application: Application): AndroidViewModel(appli
             _plantReportItem.postValue(item)
         }
 
+    }
+
+    fun deletePlantReportList() {
+        viewModelScope.launch(Dispatchers.IO) {
+            deletePlantReportListUseCase()
+        }
+    }
+
+    fun deletePlantReportItem(plantReportItem: PlantReportItem) {
+        viewModelScope.launch(Dispatchers.IO) {
+            deletePlantReportItemUseCase(plantReportItem)
+        }
     }
 
 }

@@ -29,4 +29,6 @@
     <dimen name="contentPadding_cardview_plant_report">16dp</dimen>
     <dimen name="corner_size_cardview_plant_report">14dp</dimen>
     <dimen name="text_size_cardview_plant_report">20sp</dimen>
+    <dimen name="marginTop_toolbar_report">32dp</dimen>
+    <dimen name="marginStart_text_result">16dp</dimen>
 </resources>

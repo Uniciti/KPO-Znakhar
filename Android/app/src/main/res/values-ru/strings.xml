@@ -18,4 +18,8 @@
     <string name="recommendations">Рекомендации:</string>
     <string name="save">Сохранить</string>
     <string name="template_report">Отчет: %s</string>
+    <string name="MailError">Приложение для отправки электронной почты не найдено</string>
+    <string name="report">Отчет</string>
+    <string name="delete">Удалить</string>
+    <string name="gallery">Галерея</string>
 </resources>

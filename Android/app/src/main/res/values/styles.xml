@@ -35,6 +35,7 @@
         <item name="android:textSize">@dimen/text_size_result_processing</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginTop">@dimen/marginTop_text_result_processing</item>
+        <item name="android:layout_marginStart">@dimen/marginStart_text_result</item>
     </style>
     <style name="style_text_title_list_defects">
         <item name="android:textSize">@dimen/text_size_title_list_defects</item>

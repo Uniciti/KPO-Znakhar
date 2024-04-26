@@ -15,7 +15,8 @@
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:navigationIcon="@drawable/icon_arrow_back" />
+        app:navigationIcon="@drawable/icon_arrow_back"
+        app:menu="@menu/menu_reports"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPlantReportList"

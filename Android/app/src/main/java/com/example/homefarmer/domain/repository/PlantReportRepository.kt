@@ -10,5 +10,11 @@ class PlantReportRepository(private val plantDao: PlantDao) {
         plantDao.addPlantReportItem(plantReportItem)
     }
 
+    suspend fun deletePlantReportItem(plantReportItem: PlantReportItem) {
+        plantDao.deletePlantReportItem(plantReportItem)
+    }
+
     suspend fun getPlantReportItem(itemId: Int) = plantDao.getPlantReportItem(itemId)
+
+    suspend fun deletePlantReportList() = plantDao.deletePlantReportList()
 }
