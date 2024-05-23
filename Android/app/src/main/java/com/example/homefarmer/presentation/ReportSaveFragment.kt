@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,19 @@ import androidx.navigation.fragment.findNavController
 import com.example.homefarmer.R
 import com.example.homefarmer.databinding.FragmentReportBinding
 import com.example.homefarmer.domain.entity.PlantReportItem
+import com.example.homefarmer.domain.entity.PredictionResponse
+import com.google.gson.Gson
+
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.engine.cio.CIO
+import io.ktor.client.request.forms.submitFormWithBinaryData
+import io.ktor.client.statement.bodyAsText
+import io.ktor.http.Headers
+import io.ktor.http.HttpHeaders
+import io.ktor.http.content.PartData
+import io.ktor.utils.io.streams.asInput
+import kotlinx.coroutines.runBlocking
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -32,6 +46,8 @@ class ReportSaveFragment : Fragment() {
         ViewModelProvider(this)[PlantReportItemViewModel::class.java]
     }
     private var imgPath: String? = null
+    private var jpgPath = ""
+    private var predictionText = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +68,7 @@ class ReportSaveFragment : Fragment() {
                 PlantReportItem(
                     0,
                     imgPath!!,
-                    "",
+                    predictionText,
                     "",
                     getCurrentDate()
                 )
@@ -73,6 +89,7 @@ class ReportSaveFragment : Fragment() {
 
     private fun parseParam() {
         val imgPath = arguments?.getString(REPORT_KEY) ?: throw RuntimeException("Can't find img")
+        jpgPath = arguments?.getString(PhotoCameraFragment.JPG) ?: throw RuntimeException("Can't find img")
 
         transformBitmap(imgPath)
     }
@@ -90,7 +107,7 @@ class ReportSaveFragment : Fragment() {
         imgBitmap?.let { saveFile(it) }
 
         // todo вынести в отдельную функцию для вставки, когда будет принимать данные с сервера
-        binding.imgReportResult.setImageBitmap(imgBitmap)
+        getReport(imgBitmap!!)
     }
 
     private fun rotateBitmap(bitmap: Bitmap?, degrees: Float): Bitmap? {
@@ -103,7 +120,6 @@ class ReportSaveFragment : Fragment() {
     }
 
     private fun saveFile(imgBitmap: Bitmap) {
-
         val file = File(context?.filesDir, getNameImage())
         imgPath = file.toString()
         val outputStream = FileOutputStream(file)
@@ -131,6 +147,36 @@ class ReportSaveFragment : Fragment() {
 
     private fun launchPlantReportList() {
         findNavController().navigate(R.id.action_reportFragment_to_reportsFragment)
+    }
+
+    private fun getReport(imgBitmap: Bitmap) {
+        val client = HttpClient(CIO)
+        val imageFile = File(jpgPath)
+
+        runBlocking {
+            val response = client.submitFormWithBinaryData(
+                url = "http://51.250.107.19//upload",
+                formData = listOf(
+                    PartData.FileItem({
+                        imageFile.inputStream().asInput()
+                    }, {
+                        imageFile.inputStream().close()
+                    }, Headers.build {
+                        append(HttpHeaders.ContentDisposition, "form-data; name=\"file\"; filename=\"${imageFile.name}\"")
+                    })
+                )
+            )
+
+            val json = response.bodyAsText()
+            val gson = Gson()
+            val predictionResponse = gson.fromJson(json, PredictionResponse::class.java)
+            val confidence = predictionResponse.confidence
+            val prediction = predictionResponse.prediction
+            Log.i("MyLog", prediction)
+            predictionText = "$prediction\nВероятность: $confidence"
+            binding.imgReportResult.setImageBitmap(imgBitmap)
+            binding.tvListDefects.text = predictionText
+        }
     }
 
     companion object {

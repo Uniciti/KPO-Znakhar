@@ -34,7 +34,6 @@ class PhotoCameraFragment : Fragment() {
     private lateinit var imageCapture: ImageCapture
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -83,9 +82,11 @@ class PhotoCameraFragment : Fragment() {
 
     @SuppressLint("ServiceCast")
     fun isInternetAvailable(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = connectivityManager.activeNetwork ?: return false
-        val networkCapabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+        val networkCapabilities =
+            connectivityManager.getNetworkCapabilities(network) ?: return false
         return networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 
@@ -97,7 +98,7 @@ class PhotoCameraFragment : Fragment() {
 
             val preview = Preview.Builder()
                 .build()
-                .also {mPreview ->
+                .also { mPreview ->
                     mPreview.setSurfaceProvider(
                         binding.cameraPreview.surfaceProvider
                     )
@@ -127,7 +128,6 @@ class PhotoCameraFragment : Fragment() {
     }
 
 
-
     private fun takePhoto() {
         val photoFile = File(requireContext().externalMediaDirs.first(), "photo.jpg")
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
@@ -139,7 +139,7 @@ class PhotoCameraFragment : Fragment() {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     // Путь к сохраненному изображению
                     val savedUri = Uri.fromFile(photoFile)
-                    launchPlantReportFragment(savedUri.toString())
+                    launchPlantReportFragment(savedUri.toString(), photoFile.toString())
                 }
 
                 override fun onError(exception: ImageCaptureException) {
@@ -167,16 +167,20 @@ class PhotoCameraFragment : Fragment() {
         }
     }
 
-    private fun launchPlantReportFragment(imgPath: String) {
+    private fun launchPlantReportFragment(imgPath: String, jpgPath: String) {
         findNavController().navigate(
             R.id.action_photoCameraFragment_to_reportFragment,
-            bundleOf(REPORT_KEY to imgPath)
+            bundleOf(
+                REPORT_KEY to imgPath,
+                JPG to jpgPath,
+            )
         )
     }
 
 
     companion object {
         private const val REPORT_KEY = "report_key"
+        const val JPG = "jpg"
         private const val CAMERA_PERMISSION_CODE = 1
         private val CAMERAX_PERMISSIONS = arrayOf(
             Manifest.permission.CAMERA

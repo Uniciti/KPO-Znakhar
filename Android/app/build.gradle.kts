@@ -40,6 +40,9 @@ android {
 }
 
 dependencies {
+
+    implementation("com.google.code.gson:gson:2.8.8")
+
     val roomVersion = "2.6.1"
 
     implementation("androidx.core:core-ktx:1.12.0")
@@ -70,5 +73,11 @@ dependencies {
     implementation("androidx.room:room-ktx:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
     testImplementation("androidx.room:room-testing:$roomVersion")
+
+    implementation("io.ktor:ktor-client-core:2.0.0")
+    implementation("io.ktor:ktor-client-cio:2.0.0")
+    implementation("io.ktor:ktor-client-serialization:2.0.0")
+    implementation("io.ktor:ktor-client-json:2.0.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
 
 }

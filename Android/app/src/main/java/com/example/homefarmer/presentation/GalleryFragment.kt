@@ -15,10 +15,7 @@ class GalleryFragment : Fragment() {
     private var _binding: FragmentGalleryBinding? = null
     private val binding
         get() = _binding!!
-    private lateinit var adapter: PlantImgListAdapter
-    private val viewModel by lazy {
-        ViewModelProvider(this)[PlantImgViewModel::class.java]
-    }
+
 
 
     override fun onCreateView(
@@ -33,32 +30,13 @@ class GalleryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupRecyclerView()
-        observerViewModel()
 
         binding.tbPlantGallery.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
     }
 
-    private fun setupRecyclerView() {
-        adapter = PlantImgListAdapter()
-        binding.rvPlantImgList.adapter = adapter
 
-        setupClickListener()
-    }
-
-    private fun observerViewModel() {
-        viewModel.plantImgList.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-        }
-    }
-
-    private fun setupClickListener() {
-        adapter.onPlantImgClickListener = {plantImg ->
-
-        }
-    }
 
 
 
