@@ -173,6 +173,7 @@ class PhotoCameraFragment : Fragment() {
             bundleOf(
                 REPORT_KEY to imgPath,
                 JPG to jpgPath,
+                "FROM" to "camera"
             )
         )
     }

@@ -32,11 +32,11 @@ import kotlinx.coroutines.runBlocking
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
-import java.lang.RuntimeException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import kotlin.RuntimeException
 
 class ReportSaveFragment : Fragment() {
     private var _binding: FragmentReportBinding? = null
@@ -48,6 +48,8 @@ class ReportSaveFragment : Fragment() {
     private var imgPath: String? = null
     private var jpgPath = ""
     private var predictionText = ""
+    private var imgFile: File? = null
+    private var from = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -90,6 +92,7 @@ class ReportSaveFragment : Fragment() {
     private fun parseParam() {
         val imgPath = arguments?.getString(REPORT_KEY) ?: throw RuntimeException("Can't find img")
         jpgPath = arguments?.getString(PhotoCameraFragment.JPG) ?: throw RuntimeException("Can't find img")
+        from = arguments?.getString("FROM") ?: "I am tired"
 
         transformBitmap(imgPath)
     }
@@ -106,6 +109,7 @@ class ReportSaveFragment : Fragment() {
 
         imgBitmap?.let { saveFile(it) }
 
+        binding.imgReportResult.setImageBitmap(imgBitmap)
         // todo вынести в отдельную функцию для вставки, когда будет принимать данные с сервера
         getReport(imgBitmap!!)
     }
@@ -122,6 +126,7 @@ class ReportSaveFragment : Fragment() {
     private fun saveFile(imgBitmap: Bitmap) {
         val file = File(context?.filesDir, getNameImage())
         imgPath = file.toString()
+        imgFile = file
         val outputStream = FileOutputStream(file)
         imgBitmap.compress(Bitmap.CompressFormat.JPEG, QUALITY_IMG, outputStream)
         outputStream.close()
@@ -151,18 +156,30 @@ class ReportSaveFragment : Fragment() {
 
     private fun getReport(imgBitmap: Bitmap) {
         val client = HttpClient(CIO)
-        val imageFile = File(jpgPath)
+        val imageFile = when(from) {
+            "camera" -> {
+                Log.i("MyLog", "camera")
+                File(jpgPath)
+            }
+            "gallery" -> {
+                Log.i("MyLog", "gallery")
+                imgFile
+            }
+            else -> throw RuntimeException("I am tired")
+        }
+
+
 
         runBlocking {
             val response = client.submitFormWithBinaryData(
                 url = "http://51.250.107.19//upload",
                 formData = listOf(
                     PartData.FileItem({
-                        imageFile.inputStream().asInput()
+                        imageFile?.inputStream()?.asInput()!!
                     }, {
-                        imageFile.inputStream().close()
+                        imageFile?.inputStream()?.close()
                     }, Headers.build {
-                        append(HttpHeaders.ContentDisposition, "form-data; name=\"file\"; filename=\"${imageFile.name}\"")
+                        append(HttpHeaders.ContentDisposition, "form-data; name=\"file\"; filename=\"${imageFile?.name}\"")
                     })
                 )
             )
@@ -180,7 +197,7 @@ class ReportSaveFragment : Fragment() {
     }
 
     companion object {
-        private const val REPORT_KEY = "report_key"
+        const val REPORT_KEY = "report_key"
         private const val DEGREES = 90f
         private const val DATE_FORMAT = "dd.MM.yyyy"
         private const val QUALITY_IMG = 100

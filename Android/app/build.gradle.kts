@@ -80,4 +80,6 @@ dependencies {
     implementation("io.ktor:ktor-client-json:2.0.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
 
+    implementation("androidx.core:core-ktx:1.13.1")
+
 }

@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_mainScreenFragment_to_galleryFragment"
             app:destination="@id/galleryFragment" />
+        <action
+            android:id="@+id/action_mainScreenFragment_to_reportFragment"
+            app:destination="@id/reportFragment" />
     </fragment>
     <fragment
         android:id="@+id/photoCameraFragment"
@@ -39,7 +42,11 @@
     <fragment
         android:id="@+id/galleryFragment"
         android:name="com.example.homefarmer.presentation.GalleryFragment"
-        android:label="GalleryFragment" />
+        android:label="GalleryFragment" >
+        <action
+            android:id="@+id/action_galleryFragment_to_reportFragment"
+            app:destination="@id/reportFragment" />
+    </fragment>
     <fragment
         android:id="@+id/reportFragment"
         android:name="com.example.homefarmer.presentation.ReportSaveFragment"

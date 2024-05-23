@@ -1,13 +1,17 @@
 package com.example.homefarmer.presentation
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,6 +19,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.homefarmer.R
 import com.example.homefarmer.databinding.CustomDialogInfoBinding
 import com.example.homefarmer.databinding.FragmentMainScreenBinding
+import java.io.InputStream
 
 
 class MainScreenFragment : Fragment() {
@@ -24,6 +29,7 @@ class MainScreenFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProvider(this)[MainScreenViewModel::class.java]
     }
+    private val PICK_IMAGE = 100
 
 
 
@@ -59,7 +65,9 @@ class MainScreenFragment : Fragment() {
             navigateTo(R.id.action_mainScreenFragment_to_reportsFragment)
         }
         cvGallery.setOnClickListener {
-            navigateTo(R.id.action_mainScreenFragment_to_galleryFragment)
+            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(intent, PICK_IMAGE)
+//            navigateTo(R.id.action_mainScreenFragment_to_galleryFragment)
         }
         tbMainScreen.setOnMenuItemClickListener {
             when(it.itemId) {
@@ -113,6 +121,31 @@ class MainScreenFragment : Fragment() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE) {
+            val selectedImage = data?.data
+            launchPlantReportFragment(selectedImage.toString(), selectedImage.toString())
+            selectedImage?.let {
+                val inputStream: InputStream? = context?.contentResolver?.openInputStream(it)
+            }
+
+
+        }
+    }
+
+    private fun launchPlantReportFragment(imgPath: String, jpgPath: String) {
+
+        findNavController().navigate(
+            R.id.action_mainScreenFragment_to_reportFragment,
+            bundleOf(
+                ReportSaveFragment.REPORT_KEY to imgPath,
+                PhotoCameraFragment.JPG to jpgPath,
+                "FROM" to "gallery"
+            )
+        )
+    }
 
     companion object {
         private const val KEY_IS_FIRST = "isFirstRun"
