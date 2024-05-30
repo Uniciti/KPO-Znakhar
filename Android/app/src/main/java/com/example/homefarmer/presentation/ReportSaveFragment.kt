@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.homefarmer.R
+import com.example.homefarmer.data.Advice
 import com.example.homefarmer.databinding.FragmentReportBinding
 import com.example.homefarmer.domain.entity.PlantReportItem
 import com.example.homefarmer.domain.entity.PredictionResponse
@@ -48,6 +49,7 @@ class ReportSaveFragment : Fragment() {
     private var imgPath: String? = null
     private var jpgPath = ""
     private var predictionText = ""
+    private var recommendations = ""
     private var imgFile: File? = null
     private var from = ""
 
@@ -71,7 +73,7 @@ class ReportSaveFragment : Fragment() {
                     0,
                     imgPath!!,
                     predictionText,
-                    "",
+                    recommendations,
                     getCurrentDate()
                 )
             )
@@ -189,10 +191,11 @@ class ReportSaveFragment : Fragment() {
             val predictionResponse = gson.fromJson(json, PredictionResponse::class.java)
             val confidence = predictionResponse.confidence
             val prediction = predictionResponse.prediction
-            Log.i("MyLog", prediction)
-            predictionText = "$prediction\nВероятность: $confidence"
+            predictionText = Advice.type[prediction] + "\nВероятность: " + String.format("%.2f", confidence)
+            recommendations = Advice.advice[prediction] ?: ""
             binding.imgReportResult.setImageBitmap(imgBitmap)
             binding.tvListDefects.text = predictionText
+            binding.tvListRecommendation.text = recommendations
         }
     }
 

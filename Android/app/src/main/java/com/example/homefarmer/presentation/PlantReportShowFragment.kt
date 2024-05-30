@@ -78,6 +78,7 @@ class PlantReportShowFragment : Fragment() {
         val bitmap = BitmapFactory.decodeFile(imageFile.absolutePath)
         imgReportResult.setImageBitmap(bitmap)
         tvListDefects.text = plantReportItem.defects
+        tvListRecommendation.text = plantReportItem.recommendations
     }
 
 
