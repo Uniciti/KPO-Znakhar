@@ -14,7 +14,7 @@
     <string name="error_internet">Нет подключения к интернету</string>
     <string name="feedback">Обратная связь</string>
     <string name="result_processing">Результат обработки</string>
-    <string name="list_defects">Обнаружены следющие дефекты:</string>
+    <string name="list_defects">Распознанное состояние:</string>
     <string name="recommendations">Рекомендации:</string>
     <string name="save">Сохранить</string>
     <string name="template_report">Отчет: %s</string>
